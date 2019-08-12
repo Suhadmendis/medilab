@@ -1,0 +1,9 @@
+FRM_CAP = 100, 100, 995, 313, Z, 75, 75, 804, 510, C
+DN = 0, 0, 0, 0, C, 50, 50, 995, 723, C
+UFE30_Module = 0, 0, 0, 0, C
+Module3 = 0, 0, 0, 0, C
+Module2 = 125, 125, 854, 560, 
+Module1 = 0, 0, 0, 0, C
+mMain = 100, 100, 829, 535, 
+Autorise = 0, 0, 0, 0, C
+UserPermission = 0, 0, 0, 0, C

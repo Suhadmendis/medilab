@@ -1,0 +1,137 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<link href="admin_min.css" rel="stylesheet" type="text/css" media="screen" />
+
+
+
+
+<title>Search Customer</title>
+
+<script language="JavaScript" src="js/medical_med_inq.js"></script>
+<link rel="stylesheet" href="css/table_min.css" type="text/css"/>
+
+<style type="text/css">
+
+	/* START CSS NEEDED ONLY IN DEMO */
+	html{
+		height:100%;
+	}
+	
+	
+	#mainContainer{
+		width:700px;
+		margin:0 auto;
+		text-align:left;
+		height:100%;
+		background-color:#FFF;
+		border-left:3px double #000;
+		border-right:3px double #000;
+	}
+	#formContent{
+		padding:5px;
+	}
+	/* END CSS ONLY NEEDED IN DEMO */
+	
+	
+	/* Big box with list of options */
+	#ajax_listOfOptions{
+		position:absolute;	/* Never change this one */
+		width:175px;	/* Width of box */
+		height:250px;	/* Height of box */
+		overflow:auto;	/* Scrolling features */
+		border:1px solid #317082;	/* Dark green border */
+		background-color:#FFF;	/* White background color */
+		text-align:left;
+		font-size:0.9em;
+		z-index:100;
+	}
+	#ajax_listOfOptions div{	/* General rule for both .optionDiv and .optionDivSelected */
+		margin:1px;		
+		padding:1px;
+		cursor:pointer;
+		font-size:0.9em;
+	}
+	#ajax_listOfOptions .optionDiv{	/* Div for each item in list */
+		
+	}
+	#ajax_listOfOptions .optionDivSelected{ /* Selected item in the list */
+		background-color:#317082;
+		color:#FFF;
+	}
+	#ajax_listOfOptions_iframe{
+		background-color:#F00;
+		position:absolute;
+		z-index:5;
+	}
+	
+	form{
+		display:inline;
+	}
+
+	#article {font: 12pt Verdana, geneva, arial, sans-serif;  background: white; color: black; padding: 10pt 15pt 0 5pt}
+    </style>
+	<link media="screen" rel="stylesheet" type="text/css" href="css/admin_min.css"  />
+
+</head>
+
+<body>
+
+ <table width="1000" border="0">
+ 
+<tr>					
+					<?php 
+	  				$stname = $_GET["stname"];
+					?>
+                             <td width="150"  background="" ><input type="text" name="txtppno" id="txtppno" value="" class="text_purchase3" onkeyup="<?php echo "update_item_list('$stname')"; ?>"  /></td>
+                            
+      <td width="160"  background="" ><input type="text" name="txtpano" id="txtpano" value="" class="text_purchase3" onkeyup="<?php echo "update_item_list('$stname')"; ?>"  /></td>
+    <td width="160"  background="" ><input type="text" name="cmbno" id="cmbno" value="" class="text_purchase3" onkeyup="<?php echo "update_item_list('$stname')"; ?>" /></td>
+      <td width="317"  background="" ><input type="text" name="name" id="name" value="" class="text_purchase3" onkeyup="<?php echo "update_item_list('$stname')"; ?>"  /></td>
+      <td width="229"  background="" >&nbsp;</td>
+   </tr>  </table>    
+<div class="CSSTableGenerator" id="filt_table">  <table width="1000" border="0" class=\"form-matrix-table\">
+                            <tr>
+                              <td width="190"  background="" ><font color="#FFFFFF">PP No</font></td>
+                              <td width="190"  background=""><font color="#FFFFFF">PA No</font></td>
+                              <td width="190"  background=""><font color="#FFFFFF">CMB No</font></td>
+                              <td width="270"  background=""><font color="#FFFFFF">Name</font></td>
+                              <td width="100"  background=""><font color="#FFFFFF">Date</font></td>
+
+   </tr>
+                            <?php 
+							
+							require_once("config.inc.php");
+							require_once("DBConnector.php");
+							$db = new DBConnector();
+							
+						
+							$sql="select DREFNO, PA_NO, CMB_NO, NAME, SDATE  from rege  ORDER BY PA_NO limit 50 ";
+							
+							$result =mysqli_query($GLOBALS['dbinv'],$sql) ; 
+							while($row = mysql_fetch_array($result)){
+					
+							echo "<tr>               
+                              <td onclick=\"assn_med_entry('".$row['PA_NO']."');\">".$row['DREFNO']."</a></td>
+							  <td onclick=\"assn_med_entry('".$row['PA_NO']."');\">".$row['PA_NO']."</a></td>
+							  <td onclick=\"assn_med_entry('".$row['PA_NO']."');\">".$row['CMB_NO']."</a></td>
+							  <td onclick=\"assn_med_entry('".$row['PA_NO']."');\">".$row['NAME']."</a></td>
+							  <td onclick=\"assn_med_entry('".$row['PA_NO']."');\">".$row['SDATE']."</a></td>";
+							  	
+                            
+                              
+                           echo "</tr>";
+							
+						}	
+							  ?>
+                    </table>
+                </div>
+
+</body>
+</html>
